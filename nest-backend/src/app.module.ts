@@ -16,8 +16,8 @@ import { UserStockHoldingsModule } from './user-stock-holdings/user-stock-holdin
       type: 'mysql',
       host: 'db',
       port: 3306,
-      username: 'myuser',
-      password: 'mypassword',
+      username: 'root',
+      password: 'rootpassword',
       database: 'mydatabase',
       entities: [StockInfo, User, UserStockHoldings],
       synchronize: true, // 这个选项会在每次应用启动时自动创建数据库表
