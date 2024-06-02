@@ -7,22 +7,27 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    networks:
+      - app-network
     environment:
       - NODE_ENV=production
 
   nest-backend:
     build:
       context: ./nest-backend
-    ports:
-      - "3000:3000"
-    environment:
-      - MYSQL_HOST=localhost
-      - MYSQL_PORT=3306
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=170828
-      - MYSQL_DATABASE=stock
+      dockerfile: Dockerfile
     depends_on:
       - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USERNAME: myuser
+      DB_PASSWORD: mypassword
+      DB_DATABASE: mydatabase
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
   
   flask-backend:
     build:
@@ -32,13 +37,16 @@ services:
 
   db:
     image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: 170828
-      MYSQL_DATABASE: stock
-    volumes:
-      - db_data:/var/lib/mysql
+    networks:
+      - app-network
 
-volumes:
-  db_data:
+networks:
+  app-network:
+    driver: bridge
