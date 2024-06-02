@@ -14,11 +14,11 @@ import { UserStockHoldingsModule } from './user-stock-holdings/user-stock-holdin
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
+      host: 'db',
       port: 3306,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      username: 'root',
+      password: '170828',
+      database: 'mydatabase',
       entities: [StockInfo, User, UserStockHoldings],
       synchronize: true, // 这个选项会在每次应用启动时自动创建数据库表
       extra: {
