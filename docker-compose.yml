@@ -21,8 +21,8 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_USERNAME: root
-      DB_PASSWORD: 170828
+      DB_USERNAME: myuser
+      DB_PASSWORD: mypassword
       DB_DATABASE: mydatabase
     ports:
       - "3000:3000"
@@ -40,8 +40,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 170828
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
     ports:
       - "3306:3306"
     networks:
