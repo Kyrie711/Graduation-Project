@@ -1,0 +1,28 @@
+.header {
+  height: var(--header-height);
+  padding: 0 100px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,.02),inset 0 -1px 0 rgba(0,0,0,.06);
+
+
+  .title {
+    margin-left: 12px;
+    font-size: 18px;
+  }
+
+  .user-wrapper {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: #61666d;
+    .user {
+      cursor: pointer;
+      margin-left: 12px;
+
+      &:hover {
+        color: #3195ff;
+      }
+    }
+  }
+}

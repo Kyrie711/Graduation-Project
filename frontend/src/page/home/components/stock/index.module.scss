@@ -1,0 +1,16 @@
+.stock {
+  padding: 0px 80px;
+  width: calc(100vw - 200px);
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    :global{
+      input {
+        height: 32px;
+      }
+    }
+  }
+}

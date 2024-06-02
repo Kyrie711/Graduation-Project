@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+
+  nest-backend:
+    build:
+      context: ./nest-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=170828
+      - MYSQL_DATABASE=stock
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 170828
+      MYSQL_DATABASE: stock
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
