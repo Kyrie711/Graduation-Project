@@ -7,8 +7,9 @@ WORKDIR /app
 # 复制依赖文件
 COPY requirements.txt .
 
-# 安装依赖
-RUN pip install -r requirements.txt
+# 更新 pip 并安装依赖项
+RUN pip install --upgrade pip && \
+  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
 # 复制应用代码
 COPY . .
