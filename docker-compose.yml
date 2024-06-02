@@ -42,8 +42,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
-      MYSQL_USER: root
-      MYSQL_PASSWORD: rootpassword
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: rootpassword
     ports:
       - "3306:3306"
     networks:
