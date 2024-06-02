@@ -3,29 +3,27 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StockModule } from './stock/stock.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { StockInfo } from './stock/stock.entity';
+import { User } from './user/entities/user.entity';
 import { CorsMiddleware } from './cors.middleware';
 import { UserModule } from './user/user.module';
+import { UserStockHoldings } from './user-stock-holdings/user-stock-holdings.entity';
 import { UserStockHoldingsModule } from './user-stock-holdings/user-stock-holdings.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get<string>('DB_HOST'),
-        port: configService.get<number>('DB_PORT'),
-        username: configService.get<string>('DB_USERNAME'),
-        password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_DATABASE'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
-      }),
-      inject: [ConfigService],
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: 3306,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      entities: [StockInfo, User, UserStockHoldings],
+      synchronize: true, // 这个选项会在每次应用启动时自动创建数据库表
+      extra: {
+        timezone: 'Z', // 使用 UTC 时间
+      },
     }),
     // TypeOrmModule.forRoot({
     //   type: 'mysql',
