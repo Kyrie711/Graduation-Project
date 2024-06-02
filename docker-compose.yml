@@ -11,20 +11,6 @@ services:
       - app-network
     environment:
       - NODE_ENV=production
-  
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: root
-      MYSQL_PASSWORD: rootpassword
-    ports:
-      - "3306:3306"
-    networks:
-      - app-network
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   nest-backend:
     build:
@@ -51,6 +37,19 @@ services:
       - "5000:5000"
     networks:
       - app-network
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 networks:
   app-network:
